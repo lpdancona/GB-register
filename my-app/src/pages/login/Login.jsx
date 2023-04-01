@@ -4,13 +4,21 @@ import Axios from "axios";
 function Login() {
   const [usernameReg, setUsernameReg] = useState("");
   const [passwordReg, setPasswordReg] = useState("");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const register = () => {
     Axios.post("http://localhost:8002/register", {
       username: usernameReg,
       password: passwordReg,
+    }).then((response) => {
+      console.log(response);
+    });
+  };
+  const login = () => {
+    Axios.post("http://localhost:8002/login", {
+      username: username,
+      password: password,
     }).then((response) => {
       console.log(response);
     });
@@ -39,10 +47,20 @@ function Login() {
       <div className="login">
         <h1>login</h1>
         <label>Username</label>
-        <input type="text" />
+        <input
+          type="text"
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+        />
         <label>Password</label>
-        <input type="text" />
-        <button>login</button>
+        <input
+          type="text"
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
+        <button onClick={login}>login</button>
       </div>
     </div>
   );
