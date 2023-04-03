@@ -1,7 +1,7 @@
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
-
+const bcrypt = require("bcrypt");
 const app = express();
 
 app.use(cors());
@@ -14,42 +14,31 @@ const db = mysql.createConnection({
   database: "gb_regapp",
 });
 
-app.post("/register", (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-
-  db.query(
-    "INSERT INTO users (username, password) VALUES (?,?)",
-    [username, password],
-    (err, result) => {
-      console.log(err);
-    }
-  );
-});
-
-app.post("/login", (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
+app.post("/api/login", (req, res) => {
+  const { username, password } = req.body;
 
   db.query(
     "SELECT * FROM users WHERE username = ? AND password = ?",
     [username, password],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send("An error occurred while checking the database.");
-      } else if (result.length === 0) {
-        res.status(404).send("Username or password is incorrect.");
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        res.status(500).send("Error logging in");
+      } else if (results.length === 0) {
+        res.status(401).send("Invalid username or password");
       } else {
-        const user = {
-          username: result[0].username,
-          password: result[0].password,
-        };
-        res.send(user);
+        const user = results[0];
+        res.status(200).json({
+          id: user.id,
+          username: user.username,
+          name: user.name,
+          email: user.email,
+        });
       }
     }
   );
 });
+
 app.post("/api/classes", (req, res) => {
   const { name, startTime, endTime, capacity } = req.body;
 
@@ -75,21 +64,74 @@ app.post("/api/classes", (req, res) => {
 });
 
 app.post("/api/check-ins", (req, res) => {
-  const { classId } = req.body;
-  const checkInTime = new Date();
-
-  db.query(
-    "INSERT INTO check_ins (class_id, user_id, check_in_time) VALUES (?, ?, ?)",
-    [classId, userId, checkInTime],
-    (error, result) => {
-      if (error) {
-        console.error(error);
-        res.status(500).send("Error checking in");
-      } else {
-        res.status(200).send("Checked in successfully");
-      }
+  const { classId, userId } = req.body;
+  console.log("class", classId);
+  console.log("user", userId);
+  // Check if the class exists
+  db.query("SELECT * FROM classes WHERE id = ?", [classId], (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send("Failed to check in. Please try again.");
+      return;
     }
-  );
+
+    if (result.length === 0) {
+      res.status(400).send("Class not found.");
+      return;
+    }
+
+    const classItem = result[0];
+
+    // Check if the user exists
+    db.query("SELECT * FROM users WHERE id = ?", [userId], (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("Failed to check in. Please try again.");
+        return;
+      }
+
+      if (result.length === 0) {
+        res.status(400).send("User not found.");
+        return;
+      }
+
+      // Check if the class is already full
+      db.query(
+        "SELECT COUNT(*) AS num_check_ins FROM check_ins WHERE class_id = ?",
+        [classId],
+        (err, result) => {
+          if (err) {
+            console.error(err);
+            res.status(500).send("Failed to check in. Please try again.");
+            return;
+          }
+
+          const numCheckIns = result[0].num_check_ins;
+
+          if (numCheckIns >= classItem.capacity) {
+            res.status(400).send("Class is already full.");
+            return;
+          }
+
+          // Insert the check-in record into the database
+          const checkInTime = new Date();
+          db.query(
+            "INSERT INTO check_ins (class_id, user_id, check_in_time) VALUES (?, ?, ?)",
+            [classId, userId, checkInTime],
+            (err, result) => {
+              if (err) {
+                console.error(err);
+                res.status(500).send("Failed to check in. Please try again.");
+                return;
+              }
+
+              res.send(`Checked in to ${classItem.name} at ${checkInTime}.`);
+            }
+          );
+        }
+      );
+    });
+  });
 });
 
 app.get("/api/classes/today", (req, res) => {

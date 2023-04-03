@@ -20,29 +20,9 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              user ? (
-                <Home username={user.username} />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              !user ? <Login onData={handleData} /> : <Navigate to="/" />
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              !user ? <Register onData={handleData} /> : <Navigate to="/" />
-            }
-          />
+          <Route exact path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/create" element={<CreateClass />} />
           <Route path="/check-in" element={<TodayClasses />} />
         </Routes>

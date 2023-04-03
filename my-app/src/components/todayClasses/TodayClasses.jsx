@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./todayClasses.scss";
-function TodayClasses() {
+
+function TodayClasses(props) {
   const [classes, setClasses] = useState([]);
   const [selectedClass, setSelectedClass] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(
+    localStorage.getItem("user")
+  );
 
-  // Retrieve the classes happening on the current day from the server
   useEffect(() => {
     axios
       .get("http://localhost:8002/api/classes/today")
@@ -17,7 +19,6 @@ function TodayClasses() {
       });
   }, []);
 
-  // Handle the form submission when the user checks in to a class
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -28,6 +29,7 @@ function TodayClasses() {
     axios
       .post("http://localhost:8002/api/check-ins", {
         classId: selectedClass.id,
+        userId: localStorage.getItem("user"),
       })
       .then((response) => {
         alert(`You've checked in to ${selectedClass.name}!`);
@@ -72,4 +74,5 @@ function TodayClasses() {
     </div>
   );
 }
+
 export default TodayClasses;

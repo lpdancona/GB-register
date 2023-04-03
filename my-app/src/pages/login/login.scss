@@ -3,28 +3,6 @@ img {
   width: 200px;
   height: 200px;
 }
-body {
-  background: linear-gradient(
-    to right top,
-    #272b35,
-    #2f343f,
-    #383d4a,
-    #404655,
-    #494f60
-  );
-  background: rgb(195, 190, 190);
-  margin: 0;
-}
-
-* {
-  font-family: "Julius Sans One", sans-serif;
-  letter-spacing: 3px;
-}
-
-div {
-  display: flex;
-  justify-content: center;
-}
 
 .login-form {
   display: flex;
