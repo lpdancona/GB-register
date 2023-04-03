@@ -1,9 +1,104 @@
-.login-container {
-  background-color: red;
-  padding: 20px;
+@import url("https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap");
+img {
+  width: 200px;
+  height: 200px;
+}
+body {
+  background: linear-gradient(
+    to right top,
+    #272b35,
+    #2f343f,
+    #383d4a,
+    #404655,
+    #494f60
+  );
+  background: rgb(195, 190, 190);
+  margin: 0;
+}
+
+* {
+  font-family: "Julius Sans One", sans-serif;
+  letter-spacing: 3px;
+}
+
+div {
+  display: flex;
+  justify-content: center;
 }
 
 .login-form {
-  background-color: white;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  background: rgba(255, 24, 24, 0.511);
+  margin: 20px 50px;
+  padding: 30px;
+  width: 320px;
+  height: 600px;
+  border-radius: 15px;
+  box-shadow: 0px 5px 9px 3px white;
+}
+
+h1 {
+  color: black;
+  margin: 30px 0 50px 0;
+  font-size: 40px;
+}
+
+@mixin default-view {
+  padding: 0 15px;
+  width: -webkit-fill-available;
+  margin: 15px;
+  height: 35px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+input {
+  @include default-view;
+  background: rgb(237, 104, 104);
+  border: 2px solid rgb(238, 57, 57);
+  outline: none;
+  color: white;
+  transition: all 500ms ease-out;
+
+  &:focus {
+    border: 2px solid white;
+  }
+}
+
+button {
+  @include default-view;
+  background: rgb(237, 104, 104);
+  border: 1px solid rgb(238, 57, 57);
+  margin: 60px 15px 20px 15px;
+  color: black;
+  transition: all 500ms ease-out;
+  animation: lights 4000ms infinite ease-in;
+
+  &:hover {
+    border: 1px solid white;
+    box-shadow: 0px 0px 10px 2px white;
+    animation: none;
+  }
+}
+
+@keyframes lights {
+  0% {
+    box-shadow: 0px 0px 10px 2px rgb(176, 176, 176);
+    border: 1px solid rgb(176, 176, 176);
+  }
+  50% {
+    box-shadow: 0px 0px 10px 2px white;
+    border: 1px solid white;
+  }
+  70% {
+    box-shadow: 0px 0px 10px 2px rgb(213, 213, 213);
+    border: 1px solid rgb(213, 213, 213);
+  }
+  100% {
+    box-shadow: 0px 0px 10px 2px white;
+    border: 1px solid white;
+  }
 }
