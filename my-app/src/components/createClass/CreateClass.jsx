@@ -7,16 +7,28 @@ function CreateClass() {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [capacity, setCapacity] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("/api/classes", { name, startTime, endTime, capacity })
+      .post("http://localhost:8002/api/classes", {
+        name,
+        startTime,
+        endTime,
+        capacity,
+      })
       .then((response) => {
         console.log(response.data);
+        setName("");
+        setStartTime("");
+        setEndTime("");
+        setCapacity("");
+        setError("");
       })
       .catch((error) => {
         console.error(error);
+        setError("Error creating class. Please try again.");
       });
   };
 
@@ -58,6 +70,7 @@ function CreateClass() {
           onChange={(event) => setCapacity(event.target.value)}
         />
       </div>
+      {error && <div className="error">{error}</div>}
       <button type="submit">Create Class</button>
     </form>
   );

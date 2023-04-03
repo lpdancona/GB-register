@@ -50,7 +50,29 @@ app.post("/login", (req, res) => {
     }
   );
 });
+app.post("/api/classes", (req, res) => {
+  const { name, startTime, endTime, capacity } = req.body;
 
+  db.query(
+    "INSERT INTO classes (name, start_time, end_time, capacity) VALUES (?, ?, ?, ?)",
+    [name, startTime, endTime, capacity],
+    (error, result) => {
+      if (error) {
+        console.error(error);
+        res.status(500).send("Error creating class");
+      } else {
+        res.status(201).send({
+          id: result.insertId,
+          name,
+          startTime,
+          endTime,
+          capacity,
+        });
+        res.status(200).send(`Class "${name}" created successfully!`);
+      }
+    }
+  );
+});
 app.listen(8002, () => {
   console.log("server is running on port 8002");
 });
