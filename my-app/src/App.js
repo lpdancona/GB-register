@@ -10,6 +10,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import TodayClasses from "./components/todayClasses/TodayClasses";
 function App() {
   const [user, setUser] = useState("");
   function handleData(data) {
@@ -43,6 +44,7 @@ function App() {
             }
           />
           <Route path="/create" element={<CreateClass />} />
+          <Route path="/check-in" element={<TodayClasses />} />
         </Routes>
       </Router>
     </div>
