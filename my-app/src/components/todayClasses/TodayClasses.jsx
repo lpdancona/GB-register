@@ -47,9 +47,9 @@ function TodayClasses(props) {
       {classes.length === 0 ? (
         <p>No classes today.</p>
       ) : (
-        <ul>
+        <ul className="classes">
           {classes.map((classItem) => (
-            <li key={classItem.id}>
+            <li key={classItem.id} className="class">
               <h3>{classItem.name}</h3>
               <p>Start time: {classItem.start_time}</p>
               <p>End time: {classItem.end_time}</p>

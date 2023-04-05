@@ -1,45 +1,64 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./register.scss";
-import Axios from "axios";
+import Logo from "../../docs/gb-logo.svg";
 
-export default function Register(props) {
-  const [usernameReg, setUsernameReg] = useState("");
-  const [passwordReg, setPasswordReg] = useState("");
-  const [user, setUser] = useState("");
-  const register = () => {
-    Axios.post("http://localhost:8002/register", {
-      username: usernameReg,
-      password: passwordReg,
-    }).then((response) => {
-      setUser(response.data);
-    });
-  };
+function Register() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleClick = () => {
-    register();
-    props.onData(user);
-  };
+  function handleRegister(event) {
+    event.preventDefault();
+
+    axios
+      .post("http://localhost:8002/api/register", {
+        username,
+        password,
+      })
+      .then((response) => {
+        console.log(response.data.id);
+        localStorage.setItem("user", JSON.stringify(response.data.id));
+        window.location.href = "/check-in";
+      })
+      .catch((error) => {
+        console.error(error);
+        setErrorMessage("Error occurred while registering the user");
+      });
+  }
 
   return (
-    <div>
-      <div className="registration">
-        <h1>Register</h1>
-        <label>Username</label>
-        <input
-          type="text"
-          onChange={(e) => {
-            setUsernameReg(e.target.value);
-          }}
-        />
-        <label>Password</label>
-        <input
-          type="text"
-          onChange={(e) => {
-            setPasswordReg(e.target.value);
-          }}
-        />
-        <button onClick={handleClick}>Register</button>
-      </div>
+    <div className="register-container">
+      <form onSubmit={handleRegister} className="register-form">
+        <h2>Register</h2>
+        <div>
+          <label htmlFor="name">Username:</label>
+          <input
+            className="form-input"
+            type="text"
+            id="username"
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Password:</label>
+          <input
+            className="form-input"
+            type="password"
+            id="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </div>
+        <button type="submit" className="form-button">
+          Register
+        </button>
+        <img src={Logo} alt="" />
+        {errorMessage && <p>{errorMessage}</p>}
+      </form>
     </div>
   );
 }
+
+export default Register;

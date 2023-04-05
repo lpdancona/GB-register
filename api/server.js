@@ -14,6 +14,23 @@ const db = mysql.createConnection({
   database: "gb_regapp",
 });
 
+app.post("/api/register", (req, res) => {
+  const { username, password } = req.body;
+
+  db.query(
+    "INSERT INTO users (username, password) VALUES (?, ?)",
+    [username, password],
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        res.status(500).send("Error registering");
+      } else {
+        res.status(200).send("User created with success");
+      }
+    }
+  );
+});
+
 app.post("/api/login", (req, res) => {
   const { username, password } = req.body;
 
@@ -50,14 +67,7 @@ app.post("/api/classes", (req, res) => {
         console.error(error);
         res.status(500).send("Error creating class");
       } else {
-        res.status(201).send({
-          id: result.insertId,
-          name,
-          startTime,
-          endTime,
-          capacity,
-        });
-        res.status(200).send(`Class "${name}" created successfully!`);
+        res.status(201).send(`Class "${name}" created successfully!`);
       }
     }
   );

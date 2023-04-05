@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import "./login.scss";
+import Logo from "../../docs/gb-logo.svg";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -26,12 +27,13 @@ function Login() {
   }
 
   return (
-    <div>
+    <div className="login-container">
       <form onSubmit={handleLogin} className="login-form">
         <h2>Login</h2>
         <div>
           <label htmlFor="username">Username:</label>
           <input
+            className="form-input"
             type="text"
             id="username"
             value={username}
@@ -41,13 +43,17 @@ function Login() {
         <div>
           <label htmlFor="password">Password:</label>
           <input
+            className="form-input"
             type="password"
             id="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className="form-button">
+          Login
+        </button>
+        <img src={Logo} alt="" />
         {errorMessage && <p>{errorMessage}</p>}
       </form>
     </div>
