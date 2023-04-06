@@ -1,11 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap");
-img {
+.register-logo {
   width: 250px;
   height: 250px;
 }
 .login-container {
   display: flex;
   justify-content: center;
+  margin-top: 50px;
 }
 
 .login-form {
@@ -63,24 +64,5 @@ h1 {
     border: 1px solid white;
     box-shadow: 0px 0px 10px 2px white;
     animation: none;
-  }
-}
-
-@keyframes lights {
-  0% {
-    box-shadow: 0px 0px 10px 2px rgb(176, 176, 176);
-    border: 1px solid rgb(176, 176, 176);
-  }
-  50% {
-    box-shadow: 0px 0px 10px 2px white;
-    border: 1px solid white;
-  }
-  70% {
-    box-shadow: 0px 0px 10px 2px rgb(213, 213, 213);
-    border: 1px solid rgb(213, 213, 213);
-  }
-  100% {
-    box-shadow: 0px 0px 10px 2px white;
-    border: 1px solid white;
   }
 }

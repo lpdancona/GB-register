@@ -171,6 +171,33 @@ app.get("/api/classes/today", (req, res) => {
   );
 });
 
+app.get("/api/check-ins/today", (req, res) => {
+  const today = new Date();
+  const startOfToday = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
+  );
+  const endOfToday = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate() + 1
+  );
+
+  db.query(
+    "SELECT * FROM check_ins WHERE check_in_time >= ? AND check_in_time <= ?",
+    [startOfToday, endOfToday],
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        res.status(500).send("Error retrieving classes");
+      } else {
+        res.status(200).json(results);
+      }
+    }
+  );
+});
+
 app.listen(8002, () => {
   console.log("server is running on port 8002");
 });

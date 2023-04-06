@@ -11,6 +11,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import TodayClasses from "./components/todayClasses/TodayClasses";
+import TodayCheckin from "./components/todayCheckin/TodayCheckin";
 function App() {
   const [user, setUser] = useState("");
   function handleData(data) {
@@ -20,11 +21,12 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/create" element={<CreateClass />} />
           <Route path="/check-in" element={<TodayClasses />} />
+          <Route path="/check-ins/today" element={<TodayCheckin />} />
         </Routes>
       </Router>
     </div>

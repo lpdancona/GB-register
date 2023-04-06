@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./createClass.scss";
 
-function CreateClass() {
+function CreateClass(props) {
   const [name, setName] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -31,6 +31,10 @@ function CreateClass() {
         setError("Error creating class. Please try again.");
       });
   };
+  const userId = localStorage.getItem("user");
+  if (userId !== "1") {
+    return <p>You are not authorized to access this page.</p>;
+  }
 
   return (
     <form onSubmit={handleSubmit}>

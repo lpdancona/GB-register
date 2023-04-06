@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap");
+.register-logo {
+  width: 250px;
+  height: 250px;
+}
+.register-container {
+  display: flex;
+  justify-content: center;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  background: rgba(255, 24, 24, 0.511);
+  margin: 20px 50px;
+  padding: 30px;
+  width: 320px;
+  height: 600px;
+  border-radius: 15px;
+  box-shadow: 0px 5px 9px 3px white;
+}
+
+h1 {
+  color: black;
+  margin: 30px 0 50px 0;
+  font-size: 40px;
+}
+
+@mixin default-view {
+  padding: 0 15px;
+  width: -webkit-fill-available;
+  margin: 15px;
+  height: 35px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.form-input {
+  @include default-view;
+  background: rgb(237, 104, 104);
+  border: 2px solid rgb(238, 57, 57);
+  outline: none;
+  color: white;
+  transition: all 500ms ease-out;
+
+  &:focus {
+    border: 2px solid white;
+  }
+}
+
+.form-button {
+  @include default-view;
+  background: rgb(237, 104, 104);
+  border: 1px solid rgb(238, 57, 57);
+  margin: 60px 15px 20px 15px;
+  color: black;
+  transition: all 500ms ease-out;
+  animation: lights 4000ms infinite ease-in;
+
+  &:hover {
+    border: 1px solid white;
+    box-shadow: 0px 0px 10px 2px white;
+    animation: none;
+  }
+}

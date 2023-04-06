@@ -54,7 +54,7 @@ function Register() {
         <button type="submit" className="form-button">
           Register
         </button>
-        <img src={Logo} alt="" />
+        <img src={Logo} alt="" className="register-logo" />
         {errorMessage && <p>{errorMessage}</p>}
       </form>
     </div>

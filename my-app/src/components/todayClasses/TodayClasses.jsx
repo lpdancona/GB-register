@@ -40,9 +40,10 @@ function TodayClasses(props) {
         alert("Failed to check in. Please try again.");
       });
   }
-
+  const username = JSON.parse(localStorage.getItem("username"));
   return (
     <div>
+      <h1>Logged in as {username}</h1>
       <h2>Today's Classes</h2>
       {classes.length === 0 ? (
         <p>No classes today.</p>
@@ -51,8 +52,10 @@ function TodayClasses(props) {
           {classes.map((classItem) => (
             <li key={classItem.id} className="class">
               <h3>{classItem.name}</h3>
-              <p>Start time: {classItem.start_time}</p>
-              <p>End time: {classItem.end_time}</p>
+              <p>
+                Start time: {new Date(classItem.start_time).toLocaleString()}
+              </p>
+              <p>End time: {new Date(classItem.end_time).toLocaleString()}</p>
               <p>Capacity: {classItem.capacity}</p>
               <button onClick={() => setSelectedClass(classItem)}>
                 Check In
