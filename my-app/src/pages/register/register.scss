@@ -18,7 +18,7 @@
   margin: 20px 50px;
   padding: 30px;
   width: 320px;
-  height: 600px;
+  height: 640px;
   border-radius: 15px;
   box-shadow: 0px 5px 9px 3px white;
 }
@@ -52,6 +52,23 @@ h1 {
 }
 
 .form-button {
+  @include default-view;
+  background: rgb(237, 104, 104);
+  border: 1px solid rgb(238, 57, 57);
+  margin: 30px 15px 20px 15px;
+  color: black;
+  transition: all 500ms ease-out;
+  animation: lights 4000ms infinite ease-in;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  &:hover {
+    border: 1px solid white;
+    box-shadow: 0px 0px 10px 2px white;
+    animation: none;
+  }
+}
+.form-button-log {
   @include default-view;
   background: rgb(237, 104, 104);
   border: 1px solid rgb(238, 57, 57);

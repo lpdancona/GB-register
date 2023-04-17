@@ -7,7 +7,7 @@ function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
+  const [beltrank, setBeltrank] = useState("white");
   function handleRegister(event) {
     event.preventDefault();
 
@@ -15,6 +15,7 @@ function Register() {
       .post("http://localhost:8002/api/register", {
         username,
         password,
+        beltrank,
       })
       .then((response) => {
         console.log(response.data.id);
@@ -26,6 +27,9 @@ function Register() {
         setErrorMessage("Error occurred while registering the user");
       });
   }
+  const handleBeltrankChange = (event) => {
+    setBeltrank(event.target.value);
+  };
 
   return (
     <div>
@@ -52,6 +56,21 @@ function Register() {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
+          </div>
+          <div>
+            <label htmlFor="beltrank">Beltrank:</label>
+            <select
+              className="form-input"
+              id="beltrank"
+              value={beltrank}
+              onChange={handleBeltrankChange}
+            >
+              <option value="white">White</option>
+              <option value="blue">Blue</option>
+              <option value="purple">Purple</option>
+              <option value="brown">Brown</option>
+              <option value="black">Black</option>
+            </select>
           </div>
           <button type="submit" className="form-button">
             Register

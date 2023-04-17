@@ -15,11 +15,11 @@ const db = mysql.createConnection({
 });
 
 app.post("/api/register", (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, beltrank } = req.body;
 
   db.query(
-    "INSERT INTO users (username, password) VALUES (?, ?)",
-    [username, password],
+    "INSERT INTO users (username, password, beltrank) VALUES (?, ?, ?)",
+    [username, password, beltrank],
     (error, results) => {
       if (error) {
         console.error(error);

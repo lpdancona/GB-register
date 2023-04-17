@@ -57,7 +57,7 @@ function Login() {
               onChange={(event) => setPassword(event.target.value)}
             />
           </div>
-          <button type="submit" className="form-button">
+          <button type="submit" className="form-button-log">
             Login
           </button>
           <img src={Logo} alt="" className="register-logo" />
