@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./register.scss";
 import Logo from "../../docs/gb-logo.svg";
-
+import Navbar from "../../components/navbar/Navbar";
 function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -28,35 +28,38 @@ function Register() {
   }
 
   return (
-    <div className="register-container">
-      <form onSubmit={handleRegister} className="register-form">
-        <h2>Register</h2>
-        <div>
-          <label htmlFor="name">Username:</label>
-          <input
-            className="form-input"
-            type="text"
-            id="username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Password:</label>
-          <input
-            className="form-input"
-            type="password"
-            id="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </div>
-        <button type="submit" className="form-button">
-          Register
-        </button>
-        <img src={Logo} alt="" className="register-logo" />
-        {errorMessage && <p>{errorMessage}</p>}
-      </form>
+    <div>
+      <Navbar />
+      <div className="register-container">
+        <form onSubmit={handleRegister} className="register-form">
+          <h2>Register</h2>
+          <div>
+            <label htmlFor="name">Username:</label>
+            <input
+              className="form-input"
+              type="text"
+              id="username"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="email">Password:</label>
+            <input
+              className="form-input"
+              type="password"
+              id="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </div>
+          <button type="submit" className="form-button">
+            Register
+          </button>
+          <img src={Logo} alt="" className="register-logo" />
+          {errorMessage && <p>{errorMessage}</p>}
+        </form>
+      </div>
     </div>
   );
 }

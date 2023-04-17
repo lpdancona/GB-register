@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./createClass.scss";
-
+import Navbar from "../navbar/Navbar";
 function CreateClass(props) {
   const [name, setName] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -37,46 +37,53 @@ function CreateClass(props) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-        />
+    <div>
+      <Navbar />
+      <div className="class-form">
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="start-time">Start Time:</label>
+            <input
+              type="datetime-local"
+              id="start-time"
+              value={startTime}
+              onChange={(event) => setStartTime(event.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="end-time">End Time:</label>
+            <input
+              type="datetime-local"
+              id="end-time"
+              value={endTime}
+              onChange={(event) => setEndTime(event.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="capacity">Capacity:</label>
+            <input
+              type="number"
+              id="capacity"
+              value={capacity}
+              onChange={(event) => setCapacity(event.target.value)}
+            />
+          </div>
+          {error && <div className="error">{error}</div>}
+          <button type="submit" className="new-movie-button">
+            Create Class
+          </button>
+        </form>
       </div>
-      <div>
-        <label htmlFor="start-time">Start Time:</label>
-        <input
-          type="datetime-local"
-          id="start-time"
-          value={startTime}
-          onChange={(event) => setStartTime(event.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="end-time">End Time:</label>
-        <input
-          type="datetime-local"
-          id="end-time"
-          value={endTime}
-          onChange={(event) => setEndTime(event.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="capacity">Capacity:</label>
-        <input
-          type="number"
-          id="capacity"
-          value={capacity}
-          onChange={(event) => setCapacity(event.target.value)}
-        />
-      </div>
-      {error && <div className="error">{error}</div>}
-      <button type="submit">Create Class</button>
-    </form>
+    </div>
   );
 }
 

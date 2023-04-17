@@ -1,7 +1,7 @@
 import React from "react";
 import "./navbar.scss";
 import Logo from "../../docs/gb-logo.svg";
-
+import { Link } from "react-router-dom";
 export default function Navbar() {
   const username = JSON.parse(localStorage.getItem("username"));
   const logout = function () {
@@ -16,9 +16,9 @@ export default function Navbar() {
           <div className="dropdown">
             <button className="dropbtn">Options</button>
             <div className="dropdown-content">
-              <a href="#">Classes</a>
-              <a href="#">Check-Ins</a>
-              <a href="#">Create</a>
+              <a href="/check-in">Classes</a>
+              <a href="/check-ins/today">Check-Ins</a>
+              <a href="/create">Create Classes</a>
             </div>
           </div>
           {username ? (
@@ -29,8 +29,12 @@ export default function Navbar() {
             </div>
           ) : (
             <div>
-              <button className="new-movie-button">Log-in</button>
-              <button className="new-movie-button">Register</button>
+              <Link to="/login">
+                <button className="new-movie-button">Log-in</button>
+              </Link>
+              <Link to="/register">
+                <button className="new-movie-button">Register</button>
+              </Link>
             </div>
           )}
         </div>
