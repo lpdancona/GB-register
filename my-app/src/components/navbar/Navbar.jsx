@@ -4,9 +4,11 @@ import Logo from "../../docs/gb-logo.svg";
 import { Link } from "react-router-dom";
 export default function Navbar() {
   const username = JSON.parse(localStorage.getItem("username"));
+
   const logout = function () {
     window.localStorage.clear();
     window.location.reload();
+    window.location.href = "/register";
   };
   return (
     <div>

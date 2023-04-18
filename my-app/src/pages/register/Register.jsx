@@ -20,7 +20,7 @@ function Register() {
       .then((response) => {
         console.log(response.data.id);
         localStorage.setItem("user", JSON.stringify(response.data.id));
-        window.location.href = "/check-in";
+        window.location.href = "/login";
       })
       .catch((error) => {
         console.error(error);
