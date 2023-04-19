@@ -46,7 +46,7 @@ function TodayClasses(props) {
     <div>
       <Navbar />
       <div className="classes-container">
-        <h2>Today's Classes</h2>
+        <h2 className="title">Today's Classes</h2>
         {classes.length === 0 ? (
           <p>No classes today.</p>
         ) : (
@@ -68,22 +68,26 @@ function TodayClasses(props) {
               </li>
             ))}
             {selectedClass !== null && (
-              <form onSubmit={handleSubmit}>
-                <h3>
-                  Check In to {selectedClass.name} with user: {user}
-                </h3>
-                <p>Are you sure you want to check in to this class?</p>
-                <button className="new-movie-button" type="submit">
-                  Yes
-                </button>
-                <button
-                  className="new-movie-button"
-                  type="button"
-                  onClick={() => setSelectedClass(null)}
-                >
-                  Cancel
-                </button>
-              </form>
+              <div className="check-confirm">
+                <form onSubmit={handleSubmit}>
+                  <h3>
+                    Check In to {selectedClass.name} with user: {user}
+                  </h3>
+                  <p>Are you sure you want to check in to this class?</p>
+                  <div className="check-buttons">
+                    <button className="check-button" type="submit">
+                      Yes
+                    </button>
+                    <button
+                      className="check-button"
+                      type="button"
+                      onClick={() => setSelectedClass(null)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
             )}
           </ul>
         )}
