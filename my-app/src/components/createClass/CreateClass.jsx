@@ -39,49 +39,64 @@ function CreateClass(props) {
   return (
     <div>
       <Navbar />
-      <div className="class-form">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="name">Name:</label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="start-time">Start Time:</label>
-            <input
-              type="datetime-local"
-              id="start-time"
-              value={startTime}
-              onChange={(event) => setStartTime(event.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="end-time">End Time:</label>
-            <input
-              type="datetime-local"
-              id="end-time"
-              value={endTime}
-              onChange={(event) => setEndTime(event.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="capacity">Capacity:</label>
-            <input
-              type="number"
-              id="capacity"
-              value={capacity}
-              onChange={(event) => setCapacity(event.target.value)}
-            />
-          </div>
-          {error && <div className="error">{error}</div>}
-          <button type="submit" className="new-movie-button">
-            Create Class
-          </button>
-        </form>
+      <div className="flex-form">
+        <div className="form__group field">
+          <h1>Create Class</h1>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label className="form__label" htmlFor="name">
+                Name:
+              </label>
+              <input
+                className="form__field"
+                type="text"
+                id="name"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+              />
+            </div>
+            <div>
+              <label className="form__label" htmlFor="start-time">
+                Start Time:
+              </label>
+              <input
+                className="form__field"
+                type="datetime-local"
+                id="start-time"
+                value={startTime}
+                onChange={(event) => setStartTime(event.target.value)}
+              />
+            </div>
+            <div>
+              <label className="form__label" htmlFor="end-time">
+                End Time:
+              </label>
+              <input
+                className="form__field"
+                type="datetime-local"
+                id="end-time"
+                value={endTime}
+                onChange={(event) => setEndTime(event.target.value)}
+              />
+            </div>
+            <div>
+              <label className="form__label" htmlFor="capacity">
+                Capacity:
+              </label>
+              <input
+                className="form__field"
+                type="number"
+                id="capacity"
+                value={capacity}
+                onChange={(event) => setCapacity(event.target.value)}
+              />
+            </div>
+            {error && <div className="error">{error}</div>}
+            <button type="submit" className="create-button">
+              Create Class
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -20,7 +20,7 @@ export default function TodayCheckin(props) {
     <div>
       <Navbar />
       <div className="checkin-container">
-        <h2>Today's Check-Ins</h2>
+        <h1>Today's Check-Ins</h1>
         {checkIns.length === 0 ? (
           <p>No check-ins today.</p>
         ) : (

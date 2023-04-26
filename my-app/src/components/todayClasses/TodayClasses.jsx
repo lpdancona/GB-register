@@ -46,9 +46,9 @@ function TodayClasses(props) {
     <div>
       <Navbar />
       <div className="classes-container">
-        <h2 className="title">Today's Classes</h2>
+        <h1 className="title">Today's Classes</h1>
         {classes.length === 0 ? (
-          <p>No classes today.</p>
+          <p className="noclass">No classes today.</p>
         ) : (
           <ul className="classes">
             {classes.map((classItem) => (
