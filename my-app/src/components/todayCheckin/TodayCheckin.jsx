@@ -4,7 +4,7 @@ import Navbar from "../navbar/Navbar";
 import "./todayCheckin.scss";
 export default function TodayCheckin(props) {
   const [checkIns, setCheckIns] = useState([]);
-
+  const [user, setUser] = useState(localStorage.getItem("username"));
   useEffect(() => {
     axios
       .get("http://localhost:8002/api/check-ins/today")
@@ -20,7 +20,7 @@ export default function TodayCheckin(props) {
     <div>
       <Navbar />
       <div className="checkin-container">
-        <h1>Today's Check-Ins</h1>
+        <h1 className="title">Today's Check-Ins</h1>
         {checkIns.length === 0 ? (
           <p>No check-ins today.</p>
         ) : (
