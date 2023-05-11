@@ -4,3 +4,8 @@
 •Tech Stack: JavaScript, HTML, CSS, React, Express, SQL, SCSS
 
 ## 📷 Screenshots
+
+!["Register"](https://github.com/lpdancona/GB-register/blob/main/my-app/src/docs/register-page.png?raw=true)
+!["Classes"](https://github.com/lpdancona/GB-register/blob/main/my-app/src/docs/current-classes.png?raw=true)
+!["Check-ins"](https://github.com/lpdancona/GB-register/blob/main/my-app/src/docs/class-checkin.png?raw=true)
+!["Class creation"](https://github.com/lpdancona/GB-register/blob/main/my-app/src/docs/class-creation.png?raw=true)
